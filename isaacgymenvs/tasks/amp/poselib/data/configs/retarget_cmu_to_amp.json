@@ -1,6 +1,6 @@
 {
-    "source_motion": "data/01_01_cmu.npy",
-    "target_motion_path": "data/01_01_cmu_amp.npy",
+    "source_motion": "data/07_01_cmu.npy",
+    "target_motion_path": "data/07_01_cmu_amp.npy",
     "source_tpose": "data/cmu_tpose.npy",
     "target_tpose": "data/amp_humanoid_tpose.npy",
     "joint_mapping": {
@@ -24,5 +24,5 @@
     "scale": 0.056444,
 	"root_height_offset": 0.05,
 	"trim_frame_beg": 75,
-	"trim_frame_end": 372
+	"trim_frame_end": 3000
 }

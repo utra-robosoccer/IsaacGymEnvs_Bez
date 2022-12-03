@@ -42,7 +42,11 @@ DOF_BODY_IDS = [1, 2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14]
 DOF_OFFSETS = [0, 3, 6, 9, 10, 13, 14, 17, 18, 21, 24, 25, 28]
 NUM_OBS = 13 + 52 + 28 + 12 # [root_h, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, key_body_pos]
 NUM_ACTIONS = 28
-
+# bez
+DOF_BODY_IDS = [2, 3, 4, 6, 7, 9, 10, 11, 12, 13, 14]
+DOF_OFFSETS = [0, 2,3,4,5,6,9,10,12,15,16,18]
+NUM_OBS = 13 + 52 + 18 + 12 # [root_h, root_rot, root_vel, root_ang_vel, dof_pos, dof_vel, key_body_pos]
+NUM_ACTIONS = 18
 
 KEY_BODY_NAMES = ["right_hand", "left_hand", "right_foot", "left_foot"]
 
@@ -465,7 +469,8 @@ def dof_to_obs(pose):
     #dof_obs_size = 64
     #dof_offsets = [0, 3, 6, 9, 12, 13, 16, 19, 20, 23, 24, 27, 30, 31, 34]
     dof_obs_size = 52
-    dof_offsets = [0, 3, 6, 9, 10, 13, 14, 17, 18, 21, 24, 25, 28]
+    dof_offsets = [0, 2,3,4,5,6,9,10,12,15,16,18]  # [0, 3, 6, 9, 10, 13, 14, 17, 18, 21, 24, 25, 28]
+
     num_joints = len(dof_offsets) - 1
 
     dof_obs_shape = pose.shape[:-1] + (dof_obs_size,)
@@ -480,10 +485,20 @@ def dof_to_obs(pose):
         # assume this is a spherical joint
         if (dof_size == 3):
             joint_pose_q = exp_map_to_quat(joint_pose)
+            # print("joint_pose_q: ", joint_pose_q)
             joint_dof_obs = quat_to_tan_norm(joint_pose_q)
+            # print("3 - joint_dof_obs: ", joint_dof_obs.shape)
+            dof_obs_size = 6
+        elif (dof_size == 2):
+            joint_pose_q = exp_map_to_quat(joint_pose)
+
+            # print("joint_pose_q: ", joint_pose_q)
+            joint_dof_obs = quat_to_tan_norm(joint_pose_q)
+            # print("2 - joint_dof_obs: ", joint_dof_obs.shape)
             dof_obs_size = 6
         else:
             joint_dof_obs = joint_pose
+            # print("1 - joint_dof_obs: ", joint_dof_obs.shape)
             dof_obs_size = 1
 
         dof_obs[:, dof_obs_offset:(dof_obs_offset + dof_obs_size)] = joint_dof_obs

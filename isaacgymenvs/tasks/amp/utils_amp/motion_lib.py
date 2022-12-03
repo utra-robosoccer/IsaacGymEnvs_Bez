@@ -36,7 +36,7 @@ from isaacgym.torch_utils import *
 from isaacgymenvs.utils.torch_jit_utils import *
 
 from isaacgymenvs.tasks.amp.humanoid_amp_base import DOF_BODY_IDS, DOF_OFFSETS
-
+# from isaacgymenvs.tasks.amp.bez_amp_base import DOF_BODY_IDS, DOF_OFFSETS
 
 class MotionLib():
     def __init__(self, motion_file, num_dofs, key_body_ids, device):
@@ -273,11 +273,19 @@ class MotionLib():
             body_id = body_ids[j]
             joint_offset = dof_offsets[j]
             joint_size = dof_offsets[j + 1] - joint_offset
+            # print("body_id: ", body_id)
+            # print("joint_offset: ", joint_offset)
+            # print("joint_size: ", joint_size)
 
-            if (joint_size == 3):
+            if (joint_size == 3 ):
                 joint_q = local_rot[:, body_id]
                 joint_exp_map = quat_to_exp_map(joint_q)
                 dof_pos[:, joint_offset:(joint_offset + joint_size)] = joint_exp_map
+            elif (joint_size == 2):
+                joint_q = local_rot[:, body_id]
+                joint_exp_map = quat_to_exp_map(joint_q)
+                # print("joint_exp_map: ", joint_exp_map)
+                dof_pos[:, joint_offset:(joint_offset + joint_size)] = joint_exp_map[..., 0:1]
             elif (joint_size == 1):
                 joint_q = local_rot[:, body_id]
                 joint_theta, joint_axis = quat_to_angle_axis(joint_q)
@@ -308,9 +316,13 @@ class MotionLib():
             joint_offset = dof_offsets[j]
             joint_size = dof_offsets[j + 1] - joint_offset
 
-            if (joint_size == 3):
+            if (joint_size == 3 ):
                 joint_vel = local_vel[body_id]
                 dof_vel[joint_offset:(joint_offset + joint_size)] = joint_vel
+
+            elif (joint_size == 2):
+                joint_vel = local_vel[body_id]
+                dof_vel[joint_offset:(joint_offset + joint_size)] = joint_vel[0:1]
 
             elif (joint_size == 1):
                 assert(joint_size == 1)
