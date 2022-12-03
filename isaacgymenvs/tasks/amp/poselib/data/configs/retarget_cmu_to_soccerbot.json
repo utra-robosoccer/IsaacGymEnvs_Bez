@@ -1,0 +1,28 @@
+{
+    "source_motion": "data/08_02_cmu.npy",
+    "target_motion_path": "data/08_02_cmu_soccerbot.npy",
+    "source_tpose": "data/cmu_tpose.npy",
+    "target_tpose": "data/soccerbot_tpose.npy",
+    "joint_mapping": {
+         "Hips": "pelvis",
+         "LeftUpLeg": "/left_hip_side",
+         "LeftLeg": "/left_calve",
+         "LeftFoot": "/left_ankle",
+         "RightUpLeg": "/right_hip_side",
+         "RightLeg": "/right_calve",
+         "RightFoot": "/right_ankle",
+         "Head": "/neck",
+         "LeftArm": "/left_bicep",
+         "LeftForeArm": "/left_forearm",
+         "LeftHand": "/left_hand",
+         "RightArm": "/right_bicep",
+         "RightForeArm": "/right_forearm",
+         "RightHand": "/right_hand"
+
+    },
+    "rotation": [0, 0, 0.7071068, 0.7071068],
+    "scale": 0.056444,
+	"root_height_offset": 0.05,
+	"trim_frame_beg": 50,
+	"trim_frame_end": 155
+}

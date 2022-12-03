@@ -1,0 +1,28 @@
+{
+    "source_motion": "data/amp_humanoid_walk.npy",
+    "target_motion_path": "data/soccerbot_humanoid_walk.npy",
+    "source_tpose": "data/amp_humanoid_tpose.npy",
+    "target_tpose": "data/soccerbot_tpose.npy",
+    "joint_mapping": {
+         "pelvis": "/torso",
+         "left_thigh": "/left_hip_side",
+         "left_shin": "/left_calve",
+         "left_foot": "/left_ankle",
+         "right_thigh": "/right_hip_side",
+         "right_shin": "/right_calve",
+         "right_foot": "/right_ankle",
+         "head": "/head",
+         "left_upper_arm": "/left_bicep",
+         "left_lower_arm": "/left_forearm",
+         "left_hand": "/left_hand",
+         "right_upper_arm": "/right_bicep",
+         "right_lower_arm": "/right_forearm",
+         "right_hand": "/right_hand"
+
+    },
+    "rotation": [0, 0, 0.7071068, 0.7071068],
+    "scale": 0.056444,
+	"root_height_offset": 0.05,
+	"trim_frame_beg": 75,
+	"trim_frame_end": 3000
+}
